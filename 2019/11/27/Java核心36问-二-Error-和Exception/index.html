@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Java核心36问(二) Error 和Exception | Zorpz</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><meta name="generator" content="Hexo 4.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Java核心36问(二) Error 和Exception</h1><a id="logo" href="/.">Zorpz</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Java核心36问(二) Error 和Exception</h1><div class="post-meta">Nov 27, 2019</div><div class="post-content"><h4 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h4><p>Exception 和Error 都继承了Throwable 类。在Java 中只有Throwable 类型才能被抛出或者捕获。</p>
+<h4 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h4><ul>
+<li><p>Exception：可预料的情况，可以被捕获，进行响应处理。主要分为可检查异常(checked)和不可检查异常(unchecked)。其中，可检查异常在源代码必须进行显式处理。不检查异常是所谓的运行时异常，如NPE 、ArrayOutOBoundException.</p>
+</li>
+<li><p>Error ： 正常情况下，一般不会发生的错误，并且大部分会导致程序处于非正常、不可恢复状态。</p>
+</li>
+</ul>
+<h4 id="常见异常或错误"><a href="#常见异常或错误" class="headerlink" title="常见异常或错误"></a>常见异常或错误</h4><p><img src="D:%5Czzw%5Cbackup_blog%5Csource_posts%5Cimage-20191128231151174.png" alt="image-20191128231151174"></p>
+<h4 id="NoClassDefFoundError-和ClassNotFoundException-的区别"><a href="#NoClassDefFoundError-和ClassNotFoundException-的区别" class="headerlink" title="NoClassDefFoundError 和ClassNotFoundException 的区别"></a>NoClassDefFoundError 和ClassNotFoundException 的区别</h4><ul>
+<li><p>NoClassNotFoundException：发生在编译时期找不到类。</p>
+</li>
+<li><p>NoClassDefFoundError: JVM在编译时可以找到合适的类，而在运行时找不到合适的类引发的错误。</p>
+<p>PS：</p>
+<ol>
+<li>可能引发NoClassDefFoundError的原因：</li>
+</ol>
+<ul>
+<li>对应的class 在java 的classpath 中不可用；</li>
+<li>对应类在运行jar 的mainFest文件中的classpath 属性中未定义；</li>
+<li>程序的启动脚本覆盖了原来的classpath 变量；</li>
+<li>NoClassDefoundException：是java.lang.LinkageError的子类，可能因为原生的类库不可用而导致。</li>
+<li>检查日志是否由java.lang.ExceptionInitializerError的错误，若出现有可能由于静态初始化失败导致。</li>
+<li>若存在多个不同的类加载器，也有可能导致错误出现。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>类加载器机制</li>
+</ol>
+<ul>
+<li>委托。加载一个类的请求交给父类加载器，如果父类加载器不能找到或者加载这个类，那么再加载它。</li>
+<li>可见性。子类的加载器可以看到父类加载器加载的类，而父类加载器看不到子类加载器加载的类。</li>
+<li>单一性：仅加载一个类一次。</li>
+</ul>
+<h4 id="try-catch-resource"><a href="#try-catch-resource" class="headerlink" title="try-catch-resource"></a>try-catch-resource</h4><p>​    资源需要实现AutoCloseable 或者Closeable。</p>
+<h4 id="代码规范"><a href="#代码规范" class="headerlink" title="代码规范"></a>代码规范</h4><ol>
+<li>尽量避免捕获类似Exception的同样异常，而应该捕获特定异常。</li>
+<li>不要生吞异常。</li>
+<li>不要仅用e.printStackTrace, 不易排查问题， 应写入到日志系统中。</li>
+</ol>
+</div><div class="tags"><a href="/tags/Java/">Java</a></div><div class="post-nav"><a class="pre" href="/2019/11/28/Centos7%E4%BD%BF%E7%94%A8firewall%E6%9B%BF%E4%BB%A3iptable/">Centos7使用firewall替代iptable</a><a class="next" href="/2019/11/26/Java%E6%A0%B8%E5%BF%8336%E9%97%AE-%E4%B8%80-%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Java%E5%B9%B3%E5%8F%B0%EF%BC%8C-Java%E6%98%AF%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C/">Java核心36问(一) 怎么理解Java平台， Java是解释执行?</a></div><div id="container"></div><link rel="stylesheet" href="/css/default.css?v=0.0.0"><script src="/js/gitment.browser.js?v=0.0.0"></script><script>var gitment = new Gitment({
+  id: window.location.pathname.substring(1,window.location.pathname.length),
+  owner: 'DWAO',
+  repo: 'DWAO.github.io',
+  oauth: {
+    client_id: '9929295606dac7572aa1',
+    client_secret: 'f396c9bf21961bbb77cef0e60e9b6379e0f9ff05',
+  },
+})
+gitment.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/Ant-Design-Pro/" style="font-size: 15px;">Ant Design Pro</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 15px;">微服务</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/flowable/" style="font-size: 15px;">flowable</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/28/Centos7%E4%BD%BF%E7%94%A8firewall%E6%9B%BF%E4%BB%A3iptable/">Centos7使用firewall替代iptable</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/27/Java%E6%A0%B8%E5%BF%8336%E9%97%AE-%E4%BA%8C-Error-%E5%92%8CException/">Java核心36问(二) Error 和Exception</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/Java%E6%A0%B8%E5%BF%8336%E9%97%AE-%E4%B8%80-%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Java%E5%B9%B3%E5%8F%B0%EF%BC%8C-Java%E6%98%AF%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C/">Java核心36问(一) 怎么理解Java平台， Java是解释执行?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/Eureka-or-Zookeeper/">Eureka or Zookeeper?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/21/flowable/">flowable</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/Docker%E9%83%A8%E7%BD%B2Ant-Design-Pro/">Docker部署Ant Design Pro</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/IDEA%20%E4%B8%80%E9%94%AE%E5%BC%8F%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E5%88%B0Docker/">IDEA 一键式发布应用到Docker</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/docker-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/">docker 安装与卸载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E5%8D%9A%E5%AE%A2/">手把手教你建博客</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://blog.csdn.net/Taylor_Joe" title="csdn" target="_blank">csdn</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Zorpz.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>

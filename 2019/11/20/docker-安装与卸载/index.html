@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>docker 安装与卸载 | Zorpz</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><meta name="generator" content="Hexo 4.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">docker 安装与卸载</h1><a id="logo" href="/.">Zorpz</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">docker 安装与卸载</h1><div class="post-meta">Nov 20, 2019</div><div class="post-content"><p>这是一个勤勤恳恳的搬砖工</p>
+<a id="more"></a>
+<h2 id="Docker-是什么"><a href="#Docker-是什么" class="headerlink" title="Docker 是什么"></a>Docker 是什么</h2><p>集装箱，一键式打包部署环境，一次生成，处处运行。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="软件环境"><a href="#软件环境" class="headerlink" title="软件环境"></a>软件环境</h4><ul>
+<li>linux 内核至少在3.8 以上，建议3.10以上。</li>
+</ul>
+<p>PS： 查看内核版本命令:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>升级yum 版本</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum update</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>安装相关依赖</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置yum 源</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+
+<h3 id="正式开始"><a href="#正式开始" class="headerlink" title="正式开始"></a>正式开始</h3><ol>
+<li>查看docker 版本</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list docker-ce --showduplicates | sort -r</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>选择合适的版本,这里选择的是18.06.1</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install docker-ce-18.06.1.ce</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start docker</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="4">
+<li><p>设置docker 自启动 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="5">
+<li><p>检查docker 安装是否成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h2 id="卸载"><a href="#卸载" class="headerlink" title="卸载"></a>卸载</h2><ol>
+<li><p>查看docker 安装包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum list installed | grep docker</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="2">
+<li><p>删除安装的软件包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y remove docker-engine.x86_64</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<ol start="3">
+<li><p>删除镜像、容器</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /var/lib/docker</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ol>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="https://www.cnblogs.com/qgc1995/p/9553572.html" target="_blank" rel="noopener">Centos7下安装Docker</a></p>
+<p>[<a href="https://www.cnblogs.com/a1260700062/p/9923349.html" target="_blank" rel="noopener">CentOS7上Docker安装与卸载</a>]</p>
+</div><div class="tags"><a href="/tags/Docker/">Docker</a></div><div class="post-nav"><a class="pre" href="/2019/11/20/IDEA%20%E4%B8%80%E9%94%AE%E5%BC%8F%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E5%88%B0Docker/">IDEA 一键式发布应用到Docker</a><a class="next" href="/2019/11/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E5%8D%9A%E5%AE%A2/">手把手教你建博客</a></div><div id="container"></div><link rel="stylesheet" href="/css/default.css?v=0.0.0"><script src="/js/gitment.browser.js?v=0.0.0"></script><script>var gitment = new Gitment({
+  id: window.location.pathname.substring(1,window.location.pathname.length),
+  owner: 'DWAO',
+  repo: 'DWAO.github.io',
+  oauth: {
+    client_id: '9929295606dac7572aa1',
+    client_secret: 'f396c9bf21961bbb77cef0e60e9b6379e0f9ff05',
+  },
+})
+gitment.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> Categories</i></div></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> Tags</i></div><div class="tagcloud"><a href="/tags/centos/" style="font-size: 15px;">centos</a> <a href="/tags/Ant-Design-Pro/" style="font-size: 15px;">Ant Design Pro</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 15px;">微服务</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/flowable/" style="font-size: 15px;">flowable</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/28/Centos7%E4%BD%BF%E7%94%A8firewall%E6%9B%BF%E4%BB%A3iptable/">Centos7使用firewall替代iptable</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/27/Java%E6%A0%B8%E5%BF%8336%E9%97%AE-%E4%BA%8C-Error-%E5%92%8CException/">Java核心36问(二) Error 和Exception</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/Java%E6%A0%B8%E5%BF%8336%E9%97%AE-%E4%B8%80-%E6%80%8E%E4%B9%88%E7%90%86%E8%A7%A3Java%E5%B9%B3%E5%8F%B0%EF%BC%8C-Java%E6%98%AF%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C/">Java核心36问(一) 怎么理解Java平台， Java是解释执行?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/26/Eureka-or-Zookeeper/">Eureka or Zookeeper?</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/21/flowable/">flowable</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/Docker%E9%83%A8%E7%BD%B2Ant-Design-Pro/">Docker部署Ant Design Pro</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/IDEA%20%E4%B8%80%E9%94%AE%E5%BC%8F%E5%8F%91%E5%B8%83%E5%BA%94%E7%94%A8%E5%88%B0Docker/">IDEA 一键式发布应用到Docker</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/docker-%E5%AE%89%E8%A3%85%E4%B8%8E%E5%8D%B8%E8%BD%BD/">docker 安装与卸载</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/20/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%BB%BA%E5%8D%9A%E5%AE%A2/">手把手教你建博客</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> Links</i></div><ul></ul><a href="https://blog.csdn.net/Taylor_Joe" title="csdn" target="_blank">csdn</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">Zorpz.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/search.js?v=0.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+   search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
